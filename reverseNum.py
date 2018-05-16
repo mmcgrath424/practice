@@ -3,6 +3,7 @@ import os
 def reverseNum(i_num):
 	o_num = 0
 	neg_check = 1
+	
 	if i_num < 0:
 		neg_check = -1
 	
@@ -17,5 +18,9 @@ def reverseNum(i_num):
 	return o_num
 
 print reverseNum(-178564)
+
+print 2**31
+
+
 
 
