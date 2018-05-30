@@ -7,6 +7,24 @@ class ListNode(object):
 		self.value = None
 		self.prev = None
 
+	def get_next(self):
+		return self.next
+
+	def get_prev(self):
+		return self.prev
+
+	def get_value(self):
+		return self.value
+
+	def set_next(self, new_next):
+		self.next = new_next
+
+	def set_prev(self, new_prev):
+		self.prev = new_prev
+	
+	def set_value(self, new_value):
+		self.value = new_value
+
 class LinkedList(object):
 	
 	def __init__(self):
@@ -21,10 +39,10 @@ class LinkedList(object):
 			self.head = self.tail
 		else:
 			temp_node = ListNode()
-			self.tail.next = temp_node
-			temp_node.prev = self.tail
+			self.tail.set_next(temp_node)
+			temp_node.set_prev(self.tail)
 			self.tail = temp_node
-			self.tail.value = node_val
+			self.tail.set_value(node_val)
 		self.num_nodes += 1
 
 # Add a new node before the head of the list		
@@ -34,10 +52,10 @@ class LinkedList(object):
 			self.tail = self.head
 		else:
 			temp_node = ListNode()
-			self.head.prev = temp_node
-			temp_node.next = self.head
+			self.head.set_prev(temp_node)
+			temp_node.set_next(self.head)
 			self.head = temp_node
-			self.head.value = node_val
+			self.head.set_value(node_val)
 		self.num_nodes += 1
 		
 # Insert a node at the given node number		
@@ -46,13 +64,13 @@ class LinkedList(object):
 			print ("You can't insert into an empty list")
 			return None
 		new_node = ListNode()
-		new_node.value = node_val
+		new_node.set_value(node_val)
 		temp_node = self.get_node(node_num) # store node to adjust prev value
-		temp_node2 = temp_node.prev # store prev node to adjust next value
-		new_node.prev = temp_node.prev
-		new_node.next = temp_node
-		temp_node.prev = new_node
-		temp_node2.next = new_node
+		temp_node2 = temp_node.get_prev() # store prev node to adjust next value
+		new_node.set_prev(temp_node.get_prev())
+		new_node.set_next(temp_node)
+		temp_node.set_prev(new_node)
+		temp_node2.set_next(new_node)
 		if node_num == 0:
 			self.head = new_node
 		if node_num == self.num_nodes - 1:
@@ -64,8 +82,8 @@ class LinkedList(object):
 		temp_node = self.get_node(node_num) # get node to remove
 		temp_node2 = temp_node.prev # get previous node to adjust next value
 		temp_node3 = temp_node.next # get next node to adjust prev value
-		temp_node3.prev = temp_node.prev
-		temp_node2.next = temp_node.next
+		temp_node3.set_prev(temp_node.get_prev())
+		temp_node2.set_next(temp_node.get_next())
 		del temp_node
 		self.num_nodes -= 1
 
@@ -75,21 +93,21 @@ class LinkedList(object):
 			print ("out of range")
 			return 0
 		elif node_num == 0:
-			return self.head.value
+			return self.head.get_value()
 		elif node_num == self.num_nodes-1:
-			return self.tail.value
+			return self.tail.get_value()
 		else :
 			temp_node = self.head
 			for x in range (0,node_num):
-				temp_node = temp_node.next
+				temp_node = temp_node.get_next()
 			return temp_node
 
 # Print the values for all nodes in the list. 			
 	def print_list(self):
 		temp_node = self.head
 		for x in range (0,self.num_nodes):
-			print (temp_node.value)
-			temp_node = temp_node.next
+			print (temp_node.get_value())
+			temp_node = temp_node.get_next()
 			
 
 
