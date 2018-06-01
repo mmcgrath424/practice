@@ -80,8 +80,8 @@ class LinkedList(object):
 # Remove the node number supplied		
 	def remove(self,node_num):
 		temp_node = self.get_node(node_num) # get node to remove
-		temp_node2 = temp_node.prev # get previous node to adjust next value
-		temp_node3 = temp_node.next # get next node to adjust prev value
+		temp_node2 = temp_node.get_prev() # get previous node to adjust next value
+		temp_node3 = temp_node.get_next() # get next node to adjust prev value
 		temp_node3.set_prev(temp_node.get_prev())
 		temp_node2.set_next(temp_node.get_next())
 		del temp_node
