@@ -78,20 +78,36 @@ class LinkedList(object):
 			self.num_nodes += 1
 
 # Remove the node number supplied		
-	def remove(self,node_num):
-		temp_node = self.get_node(node_num) # get node to remove
-		temp_node2 = temp_node.get_prev() # get previous node to adjust next value
-		temp_node3 = temp_node.get_next() # get next node to adjust prev value
-		temp_node3.set_prev(temp_node.get_prev())
-		temp_node2.set_next(temp_node.get_next())
-		del temp_node
-		self.num_nodes -= 1
+	def remove(self,node_num):			
+		if node_num > self.num_nodes:
+			print("index out of range")
+			return None
+		else:
+			temp_node = self.get_node(node_num)		
+			if node_num == 0:
+				if self.num_nodes>1:
+					self.head = temp_node.get_next()
+					self.head.set_prev(None)
+			elif node_num==self.num_nodes-1:
+				self.tail = temp_node.get_prev()
+				self.tail.set_next(None)
+			else:			
+				temp_node2 = temp_node.get_prev() # get previous node to adjust next value
+				temp_node3 = temp_node.get_next() # get next node to adjust prev value
+				temp_node3.set_prev(temp_node.get_prev())
+				temp_node2.set_next(temp_node.get_next())
+			del temp_node
+			if self.num_nodes == 1:
+				self.head = None
+				self.tail = None
+			self.num_nodes -= 1
+		
 
 # Return the pointer to the node number requested. 
 	def get_node(self,node_num):
 		if node_num >= self.num_nodes or node_num < 0:
 			print ("out of range")
-			return 0
+			return None
 		elif node_num == 0:
 			return self.head
 		elif node_num == self.num_nodes-1:
@@ -109,6 +125,8 @@ class LinkedList(object):
 			print (temp_node.get_value())
 			temp_node = temp_node.get_next()
 			
+	def get_length(self):
+		return self.num_nodes
 
 
 if __name__=='__main__':
