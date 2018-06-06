@@ -129,16 +129,44 @@ class LinkedList(object):
 		return self.num_nodes
 
 
+
+def get_intersect(llist1,llist2):
+	node_ptrs = {}
+	for x in range(0,llist1.get_length()):
+		node_ptrs.update({llist1.get_node(x):x})
+	for y in range(0,llist2.get_length()):
+		node_ptr = llist2.get_node(y)
+		print (node_ptr)
+		print (node_ptr.get_value())
+		if node_ptr in node_ptrs:
+			print ("the intersection is at node: " + str(node_ptr))
+			print ("the value is: " + str(node_ptr.get_value()))
+			break
+	
+	print (node_ptrs)
+	return node_ptr
+
+
+		
 if __name__=='__main__':
 	test_list = LinkedList()
-	test_list.insert(0,100)
+	test_list2 = LinkedList()
+#	test_list.insert(0,100)
 	for x in range (1,10):
 		test_list.append(x)
 	
-	test_list.print_list()
+	for y in range (1,6):
+		test_list2.append(y)
 
-	test_list.insert(5,22)
+	test_list.insert(7,23456)
 	test_list.print_list()
-	test_list.remove(6)
-	test_list.print_list()
+	test_list2.tail.next = test_list.get_node(7)
+	test_list2.num_nodes +=1
+	test_list2.print_list()
+	print(test_list2.get_node(6).get_value())
+	get_intersect(test_list,test_list2)
+
+
+
+
 	
