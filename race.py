@@ -35,23 +35,29 @@ class race():
             
     def racer_pos(self):
         positions = []
-        positions.append(list(self.g4.keys()))
-        positions.append(list(self.g3.keys()))
-        positions.append(list(self.g2.keys()))
-        positions.append(list(self.g1.keys()))
-        positions.append(list(self.start.keys()))
+        if len(self.g4) >0:
+            positions = [x for x in self.g4.keys()]
+        if len(self.g3) >0:
+            positions += [x for x in self.g3.keys()]
+        if len(self.g2) >0:
+            positions += [x for x in self.g2.keys()]
+        if len(self.g1) >0:
+            positions += [x for x in self.g1.keys()]
+        if len(self.start) >0:
+            positions += [x for x in self.start.keys()]
         return positions
 
 if __name__=='__main__':
     new_race = race()
 
     while True:
-        new_race.racers['r1'] += random.randint(1,5)
-        new_race.racers['r2'] += random.randint(1,5)
-        new_race.racers['r3'] += random.randint(1,5)
-        new_race.racers['r4'] += random.randint(1,5)
+        new_race.racers['r1'] += random.randint(1,15)
+        new_race.racers['r2'] += random.randint(1,15)
+        new_race.racers['r3'] += random.randint(1,15)
+        new_race.racers['r4'] += random.randint(1,15)
         new_race.gate_notify()
         print (new_race.racer_pos())
+        print (new_race.racers)
         if new_race.racers['r1']>200:
             break
         
